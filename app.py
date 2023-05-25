@@ -5,7 +5,7 @@ import pandas as pd
 st.sidebar.write(
     '''
     # Simple Stock Price App
-    Made with **streamlit** by riztekur
+    Made with **streamlit** by Fadhil Rausyanfikr
     '''
 )
 
