@@ -9,13 +9,10 @@ st.sidebar.write(
     '''
 )
 
-tickerSymbol = st.sidebar.selectbox('Select ticker: ', ('GOOG', 'AAPL', 'MSFT', 'FB'))
+tickerSymbol = st.sidebar.selectbox('Select ticker: ', ('GOOG', 'AAPL', 'MSFT'))
 tickerData = yf.Ticker(tickerSymbol)
 
-tickerPeriod = st.sidebar.selectbox('Period:', ('1d','5d','1mo','3mo','6mo','1y','2y','5y','10y','ytd','max'))
-tickerInterval = st.sidebar.selectbox('Interval:', ('1m','2m','5m','15m','30m','60m','90m','1h','1d','5d','1wk','1mo','3mo'))
-
-tickerDf = tickerData.history(period=tickerPeriod, interval=tickerInterval)
+tickerDf = tickerData.history(interval='1d',start='2022-1-1', end='2022-12-31')
 
 "## Closing Price"
 st.line_chart(tickerDf['Close'], use_container_width=True)
