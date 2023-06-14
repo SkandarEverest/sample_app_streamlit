@@ -1,59 +1,61 @@
+from pathlib import Path
+
 import streamlit as st
-import yfinance as yf
-import pandas as pd
+
+from st_pages import Page, add_page_title, show_pages
 
 st.sidebar.write(
     '''
     # Dashboard Saham
 
-    Melakukan analisis saham pada GOOGLE , APPLE, dan MICROSOFT
-
-    Sumber Data Eksternal : yahoo finance
+    Made by Fadhil R
 
     '''
 )
 
-tickerSymbol = st.sidebar.selectbox('Select ticker: ', ('GOOG', 'AAPL', 'MSFT'))
-tickerData = yf.Ticker(tickerSymbol)
+show_pages(
+    [
+        Page("app.py", "Overview"),
+        Page("page_one.py", "Data Explorer"),
+        Page("page_two.py", "Insights"),
+        Page("page_three.py", "Reference")
+    ]
+)
 
-tickerDf = tickerData.history(interval='1d',start='2022-1-1', end='2022-12-31')
+# add_page_title(layout="wide")
 
-"## Closing Price"
-st.line_chart(tickerDf['Close'], use_container_width=True)
+"# Analisis Saham FAANG"
 
-if (tickerSymbol == 'GOOG'):
-    st.write("Plot tersebut menampilkan perubahan harga penutupan dalam rentang tanggal 1 Januari 2022 hingga 31 Desember 2022")
+'''
+Di bidang keuangan, "FAANG" adalah akronim yang mengacu pada saham lima perusahaan teknologi terkemuka Amerika: Meta (META) (sebelumnya dikenal sebagai Facebook), Amazon (AMZN), Apple (AAPL), Netflix (NFLX), dan Alphabet (GOOG) (sebelumnya dikenal sebagai Google). 
 
-    st.write("Dalam grafik ini, terlihat bahwa saham Google mengalami tren penurunan pada tahun 2022.")
+Istilah ini dipopulerkan oleh Jim Cramer, pembawa acara televisi Mad Money di CNBC pada tahun 2013, yang memuji perusahaan-perusahaan ini karena "sangat dominan di pasar mereka." Awalnya, istilah "FANG" digunakan, dengan Apple - huruf "A" kedua dalam singkatan tersebut - ditambahkan pada tahun 2017.
 
-if (tickerSymbol == 'AAPL'):
-    st.write("Plot tersebut menampilkan perubahan harga penutupan dalam rentang tanggal 1 Januari 2022 hingga 31 Desember 2022")
+'''
 
-    st.write("Dalam grafik ini, terlihat bahwa saham Apple mengalami tren penurunan pada tahun 2022.")
+"### Memahami saham FAANG"
 
-if (tickerSymbol == 'MSFT'):
-    st.write("Plot tersebut menampilkan perubahan harga penutupan dalam rentang tanggal 1 Januari 2022 hingga 31 Desember 2022")
+'''
 
-    st.write("Dalam grafik ini, terlihat bahwa saham Microsoft mengalami tren penurunan pada tahun 2022.")
+Selain dikenal luas di kalangan konsumen, kelima saham FAANG adalah salah satu perusahaan terbesar di dunia, dengan kapitalisasi pasar gabungan sekitar 7 triliun USD pada Q1 2022.
 
-"## Trading Volume"
-st.bar_chart(tickerDf['Volume'], use_container_width=True)
+Pertumbuhan substansial mereka baru-baru ini didukung oleh pembelian besar-besaran yang dilakukan oleh investor besar dan berpengaruh seperti Berkshire Hathaway (BRK), Soros Fund Management, dan Renaissance Technologies. Ini hanyalah beberapa dari banyak investor besar yang telah menambahkan saham FAANG ke dalam portofolio mereka karena kekuatan, pertumbuhan, atau momentum yang dirasakan. 
 
-"## Penjelasan"
+Setiap saham FAANG diperdagangkan di bursa Nasdaq dan termasuk dalam Indeks S&P 500. Karena S&P 500 adalah representasi pasar yang luas, pergerakan pasar mencerminkan pergerakan indeks. Pada Agustus 2021, FAANG membentuk sekitar 19% dari S&P 500 - angka yang mengejutkan mengingat S&P 500 secara umum dipandang sebagai proksi untuk ekonomi Amerika Serikat secara keseluruhan.
 
-if (tickerSymbol == 'GOOG'):
-    st.write("Plot tersebut menampilkan volume saham dengan periode hari dalam rentang tanggal 1 Januari 2022 hingga 31 Desember 2022")
+'''
 
-    st.write("Dalam grafik ini, terlihat bahwa volume saham Google terbesar ada pada bulan februari")
+"### Data yang akan dianalisis"
 
-if (tickerSymbol == 'AAPL'):
-    st.write("Plot tersebut menampilkan volume saham dengan periode hari dalam rentang tanggal 1 Januari 2022 hingga 31 Desember 2022")
+'''
 
-    st.write("Dalam grafik ini, terlihat bahwa volume saham Apple terbesar ada pada bulan mei")
+- #### Closing Price : 
+Closing Price (Harga penutupan) adalah harga mentah atau nilai tunai dari harga terakhir yang ditransaksikan pada sekuritas sebelum pasar secara resmi ditutup untuk perdagangan normal. Harga penutupan sering kali menjadi titik acuan yang digunakan investor untuk membandingkan performa saham sejak hari sebelumnya.
 
-if (tickerSymbol == 'MSFT'):
-    st.write("Plot tersebut menampilkan volume saham dengan periode hari dalam rentang tanggal 1 Januari 2022 hingga 31 Desember 2022")
+- #### Volume : 
+Volume adalah jumlah aset atau sekuritas yang berpindah tangan selama periode waktu tertentu, biasanya dalam satu hari perdagangan. Contohnya, volume perdagangan saham mengacu pada jumlah saham yang diperdagangkan antara pembukaan dan penutupan harian. Volume perdagangan, dan perubahan volume selama periode waktu tertentu, merupakan input penting bagi trader teknikal.
 
-    st.write("Dalam grafik ini, terlihat bahwa volume saham Microsoft terbesar ada pada bulan januari")
+'''
+
 
 
